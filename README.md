@@ -24,7 +24,7 @@ The main problem for any integration strategy is that developers inevitably repr
 
 For example, user account in Loomio is stored in a model known as a 'User', but in DemocracyOS the same concept is known as a ['Citizen'](https://github.com/DemocracyOS/app/blob/development/lib/models/citizen.js). Further, these models have similar properties but are specified with slightly different terminology. In DemocracyOS a 'Citizen' includes the following properties:
 
-```Citizen:
+``` Citizen:
 	firstName:
 	lastName:
 	username:
@@ -33,24 +33,28 @@ For example, user account in Loomio is stored in a model known as a 'User', but 
 	updatedAt:
 	profilePictureUrl:
 	disabledAt:
-	... ```
+	... 
+```
 
 While in Loomio a 'User' includes the following:
 
-```User:
+``` User:
 	name:
 	username:
 	avatar_initials:
 	avatar_kind:
 	avatar_url:
 	profile_url:
-	... ```
+	... 
+```
 
-Both of these include the term 'username' which is undoubtedly the same concept, but other properties use different terms e.g. ```profile_url``` is the same concept as ```profilePictureUrl``` while the 'name' concept is specified as ```name``` in Loomio but split accross ```firstName``` and ```lastName``` in DemocracyOS. If these apps followed a Piecemeal Integration strategy and wished to allow users to share their personal data accross apps, i.e. an 'Import your account details from Loomio/DemocracyOS' the developers would have to write a specific 'translation layer' for transforming one of these models into another, *in addition* to the 'Import account' feature. 
+Both of these include the term 'username' which is undoubtedly the same concept, but other properties use different terms e.g. ```profile_url``` is the same concept as ```profilePictureUrl``` while the 'name' concept is specified as ```name``` in Loomio but split accross ```firstName``` and ```lastName``` in DemocracyOS. 
+
+If these apps followed a Piecemeal Integration strategy and wished to allow users to share their personal data accross apps, i.e. an 'Import your account details from Loomio/DemocracyOS' the developers would have to write a specific 'translation layer' for transforming one of these models into another, *in addition* to the 'Import account' feature. 
 
 ###Central Hub
 
-The central
+
 
 ###Integration as a Service
 
