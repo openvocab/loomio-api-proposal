@@ -3,18 +3,42 @@
 
 ##Introduction
 
+###How to use this document
+
+This document assumes you're familiar with some basic technical terms of the Web but is written with non-technical audience in mind. For example, you will need to understand what [API](http://en.wikipedia.org/wiki/Application_programming_interface) means. 
+
+If you want a high-level of overview of software integration read the rest of the Introduction and Stratgies for Data Integration.
+
+If you want to understand how Linked Data and JSON-LD work continue on with Open Vocab Implementation with JSON-LD.
+
+If you want to dive into the details of what the Loomio API could look like head to Data Entities.
+
+###Main points
+
+ 1. People mean different things when speak of 'integrating apps'. 
+ 2. Data integration is more powerful and flexible than other types of integration (but the others are cool too).
+ 3. We advocate the 'Open Vocab' approach to data integration.
+ 5. [JSON-LD](http://json-ld.org/) (a data format) makes impementing an Open Vocab approach easy.
+ 5. We provide details on how to implement an Open Vocab strategy using Loomio, Cobudget, and DemocracyOS API's as examples.
+
+###What do you mean by 'Data Integration'?
+
 Software integration can occur at three different levels:
  1. User Interface (UI),
- 2. Business Logic, and
+ 2. Business Logic or 'Services', and
  3. Data
 
-Integrating at the UI level means that familiar elements of one app appear in another app. For example, the Loomio decision pie chart might appear in Cobudget in a related context.
+Integrating at the UI level means that familiar elements of one app appear in another app. For example, the Loomio decision pie chart might appear in Cobudget in some relevant context.
 
-Integrating at the Business Logic level means that apps rely on common 'services'. For example, two different apps might rely on a third 'Group' service which provides a common definition of groups for client apps. This might allow a user to join a group in one app and automatically join the same group in another app.
+Integrating at the Business Logic level means that apps rely on common 'services'. For example, two different apps might rely on a third 'Group' service which provides a common definition of groups for client apps. This might allow a user to join a group in one app and be automatically added to the same group in another app.
 
-Integrating at the Data level means that an app can read from (and even write to) different sources of data. For example, DemocracyOS and Loomio may independently publish data about decisions or discussions happening around particular topics or in particular regions. A third party app might aggregate these sources and present the user with 'discussions happening in your region' or similar. 
+Integrating at the Data level means that an app can read from (and even write to) different sources of data. For example, DemocracyOS and Loomio may independently publish data through their API about decisions or discussions happening around particular topics or in particular regions. A third party app might pull data from these apps, aggregate it, and present the user with a feed of 'discussions happening in your region', or 'curent discussions on topc X'. 
 
-This document only considers Data integration. We discuss UI and Business Logic integration in separate documents.
+We can think of data integration as a 'substrate' layer. when we integrate app's data its possible to recreate the same UI elements of one app within another . Its also possible to use a data source to provide similar functionality as a service. However, the reverse is not true. There are functions that only data integration can provide that the other kinds of integration cannot.
+
+For the remainder of this document we only considers Data integration. We plan to discuss UI and Business Logic integration separately.
+
+###Data Integration Strategies
 
 We know of four strategies for integrating data from apps with other apps:
  1. 'Point-to-point Integration',
@@ -22,30 +46,21 @@ We know of four strategies for integrating data from apps with other apps:
  3. 'Integration as a Service', and
  4. 'Open Vocab'
 
-
-First, we consider why data integration is desirable and some data integration use-cases.
-
-Second, we argue that an 'Open Vocab' strategy promotes more democratic and scalable app 'ecosystems' compared to the other options.
-
-Third, we discuss how app developers can progresively implement an Open Vocab strategy. 
-
-Finally, we make specific API reccomendations for app's that wish to integrate as part of the 'Open App Ecosystem' using Loomio, Cobudget and DemocracyOS as examples. 
-
 ##Why Integrate Data?
 
-App developers may find further uses for the data generated in other apps. When apps permit users to share data other apps can repurpose the data in different ways. Developers can focus on a particular domain where their app excels and allow other apps to deal with the related but separate problems rather than trying to develop a toolbox that does everything. 
+Apps host data. The hosted Loomio sevice Loomio hosts  developers may find further uses for the data generated in other apps. When apps permit users to share data other apps can repurpose the data in different ways. Developers can focus on a particular domain where their app excels and allow other apps to deal with the related but separate problems rather than trying to develop a toolbox that does everything. 
 
 The 'blank slate' describes a common problem where a new app could be well designed and potentially useful but lacks content. The app's value may rely on having a critical mass of existing data with which the user can interact. App promoters are often caught in a catch-22 where they need users to sign up to begin adding content, but find it difficult to convince potential users to do so when this initial content does not exist. By connecting and importing data from other apps the app could 'seed' enough content and demonstrate its value to users.
 
-Users may have political or privacy concerns and wish to host their own a data themselves or with a group they trust. In the Web's current state multiple private providers host and control user data and experience. These third-party buinesss often provide  a 'free' service to users but typically sell advertising, or onsell user data to advertisers to sustain the business. A discussion of the private control of the Web vs the movement to shift control back to users themselves is beyond the scope of this document. Suffice to say that many people are not satisfied with the Web in its current state (including us!).
+Users may have political or privacy concerns and wish to host their own a data themselves or with a group they trust. In the Web's current state multiple private providers host and control user data and experience. These third-party buinesss typically provide  a 'free' service to users but sell advertising, or onsell user data to sustain the business. A discussion of the private control of data vs the movement to shift control back to users themselves is beyond the scope of this document. Suffice to say that many people are not satisfied with the Web in its current state (including us!).
 
-Lastly, with a conected ecosystem of apps users could avoid some of the more mundane tasks of the Web such as re-enetring their details in various forms. 
+Lastly, with a conected ecosystem of apps users could avoid some of the more mundane tasks of the Web such as re-entring their details in various forms. 
 
 -----
  
+##Strategies for Data Integration
 
-
-##Strategies for App Ecosystems
+###Translating Models
 
 The main problem for any integration strategy is that developers inevitably represent the same or similar data in their apps in different ways. Developers call these representations 'models'.
 
@@ -87,14 +102,14 @@ Where developers follow a 'Point-to-point Integration' strategy they write speci
 
 The 'Central Hub' strategy puts the onus of connecting and writing translation layers on the other apps that want to connect with you! 
 
-Clearly, this is only viable if your app is a market leader and controls access to desirable data. Twitter, Facebook and other well-known apps have succesfully used this strategy to create a surrounding 'ecosystem' of apps. This strategy is quite simple:
+Clearly, this is only viable if your app is a market leader and controls access to desirable data. Twitter, Facebook and other well-known apps have succesfully used this strategy to create a surrounding 'ecosystem' of apps. The bones of this strategy is quite simple:
 
 	1. Become a market leader.
 	2. Maintain a useful, easy to use API.
 
 Well, perhaps #1 is not so simple. 
 
-A surrounding ecosystem is popular because it gives market leaders certain advantages. Every app that connects and relies on the Hub's API has the incentive for the Hub app to maintain its leading positon. These other apps will perhaps also do their own marketing and promote the hub app by proxy.
+Market leaders might use the 'Central Hub' startegy to consolidate their position. Every app that connects and relies on the Hub's API has the incentive for the Hub app to maintain its leading positon. These other apps will perhaps also do their own marketing and promote the hub app by proxy.
 
 ###Integration as a Service
 
@@ -121,15 +136,17 @@ When apps use the same vocabulary, a feature that imports data from one app can 
 
 ###Discussion
 
-### Linked Data and Open Vocab Implemention Strategies
+### Open Vocab Implemention with JSON-LD
 
 
-##User
+##Data Entities
 
-##Group
+###User
 
-##Membership
+###Group
 
-##Motion 
+###Membership
 
-##Vote
+###Motion 
+
+###Vote
