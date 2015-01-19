@@ -32,9 +32,9 @@ Integrating at the UI level means that familiar components of one app appear in 
 
 Integrating at the Business Logic level means that apps rely on common 'services'. [Gravatar](https://en.gravatar.com/) is a popular service that allows app users to define their avatar image in one place and allow other apps to pull this information from it. In another example, two independent apps might depend on a third 'Group Service' app to provide a common store for group data. This might allow a user to join a group in one app and be automatically added to the same group in another app. 
 
-Integrating at the Data level means that an app can read from (and possibly write to) different sources of data. For example, DemocracyOS and Loomio may independently publish data through their APIs about decisions or discussions happening around particular topics or in particular regions. A third party app might pull data from these apps, aggregate it, and present the user with a feed of 'discussions happening in your region', or 'curent discussions on topc X'. 
+Integrating at the Data level means that an app can read from (and potentially write to) different sources of data. For example, DemocracyOS and Loomio may independently publish data through their APIs about decisions or discussions happening around particular topics or in particular regions. A third party app might pull data from these apps, aggregate it, and present the user with a feed of 'discussions happening in your region', or 'curent discussions on topc X'. 
 
-We can think of data integration as a 'substrate' layer on top of which we can build other integrations. Data integration makes it possible to recreate the same UI elements of one app within another. Similarly, data integration makes it possible to use an app as a service for another app. The reverse is not true. There are also functions that only data integration can provide that the other kinds of integration cannot. 
+We can think of data integration as a 'substrate' layer on top of which we can build other integrations. Data integration makes it possible to recreate the same UI elements of one app within another. Similarly, data integration makes it possible to use an app as a service for another app. The reverse is not true and there are also functions that only data integration can provide that the other kinds of integration cannot. 
 
 For the remainder of this article we only considers Data integration. We discuss UI and Business Logic integration separately in forthcoming articles.
 
@@ -97,8 +97,6 @@ Clearly, this is only viable if your app is a market leader and controls access 
 
 Well, perhaps #1 is not so simple. 
 
-Market leaders often use the 'Central Hub' strategy to consolidate their position. Every app that connects and relies on the Hub's API has the incentive for the hub app to maintain a leading positon. These other apps also do their own marketing and promote the hub app by proxy.
-
 ###Integration as a Service
 
 A number of ventures offer [Integration as a Service](https://www.mulesoft.com/resources/cloudhub/integration-as-a-service). The integration platform translates data from market leaders into their own representation. Apps need only connect once to the platform and purchase integration with several leading apps as package deals.
@@ -128,6 +126,8 @@ When apps use the same vocabulary, a feature that imports data from one app can 
 
 Which strategies should apps adopt? None of strategies preclude the others, but each has different implications in terms of costs, values, power and motivation.
 
+
+
 ####Point-to-point
 
 Motivation:
@@ -136,8 +136,8 @@ Users often won't to see data that is hosted on different apps 'inside' another 
 Costs:
 The cost of doing this varies depending on the nature of the data being pulled and the ease of the serving app's API. If the use-case requires only a single data entity (Posts, User account info etc) it might be equivalent to a medium to large feature. 
 
-Power:
-The providers retain control over the data.
+Organisational analog:
+The Network. The providers retain control over the data. Connections between apps are ad-hoc.
 
 Disadvantages:
 When the number of apps to connect is small point-to-point integration is quite manageable. A network of three app's requires six connections to be fully integrated:
@@ -153,18 +153,37 @@ As the number of apps grows linearly, the number of connections grows exponentia
 ![](https://www.mulesoft.com/sites/default/files/integration-complexity_2.png)
 
 
-
-
 ####Central Hub
 
 Motivation:
-The central hub strategy is low cost and can consolidate a market leader's position.For example, you must have a Twitter account to use [Medium](http://medium.com/). Medium was founded by one of the Twitter cofounders who obviously has an incentive to promote Twitter to prospective Medium users.
+The central hub strategy is low cost and can consolidate a market leader's position. 
+
+Market leaders often use the 'Central Hub' strategy to consolidate their position. Every app that connects and relies on the Hub's API has the incentive for the hub app to maintain a leading positon. These other apps also do their own marketing and promote the hub app by proxy.
+
+For example, [Medium](http://medium.com/) users must have a Twitter account. Medium was founded by one of the Twitter cofounders who clearly has an incentive to promote Twitter to prospective Medium users. 
 
 Costs:
-Costs are much lower than the point-to-point strategy. The central app only needs to maintain an easy-to-use API with good documentation. Connecting apps bear the integration costs.
+Costs are much lower than the point-to-point strategy. The central app only needs to maintain an easy-to-use API with good documentation. Connecting apps bear integration costs.
 
-Power:
-The central app controls most of the data in the network
+Organisational analog:
+Feudalism. The central app provider controls most of the data in the network. Many apps rely on the central app for functionality. Others supplement.
+
+Disadvantages:
+The majority of web users experience comes via large providers like Google, Facebook, Twitter etc who have pursued a central hub strategy. These providers have control over much of the online data. This control entails the following political consequences:
+
+ 1. Most providers serve advertising or onsell user data to advertisers - online spaces 
+
+ 2. Third parties may gain access all of the user data with a single entry point of the Providers' servers. 
+
+ The situation presents an analogue to the offline spaces: when private interests control and surveil the spaces people meet and interact then these interests will often act to curtail freedoms of speech, protest and dissent.  
+
+
+####Integration as a service
+
+Motivation:
+
+
+
 
 
 
