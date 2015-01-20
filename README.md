@@ -44,7 +44,7 @@ For the remainder of this article we only considers Data integration. We discuss
 
 ###The Translation Problem
 
-An inevitable, and perhaps main, problem for integration is that developers represent the same or similar data in their apps in different ways. Developers call these representations [models](http://en.wikipedia.org/wiki/Data_model).
+Developers represent the same or similar data in their apps in different ways. Developers call these representations [models](http://en.wikipedia.org/wiki/Data_model).
 
 For example, user account details are stored in a model known as a [User](https://github.com/loomio/loomio/blob/master/app%2Fserializers%2Fuser_serializer.rb) in Loomio, but in DemocracyOS the same concept is known as a [Citizen](https://github.com/DemocracyOS/app/blob/development/lib/models/citizen.js). These models have similar properties that the developers have specified with slightly different terminology. In DemocracyOS a ```Citizen``` includes the following properties:
 
@@ -90,7 +90,7 @@ A 'Point-to-point Integration' strategy uses a *translation layer* to transform 
 
 The 'Central Hub' strategy puts the onus of connecting and writing translation layers on the other apps that want your data!
 
-Clearly, this is only viable if your app is a market leader and controls access to desirable data. Twitter, Facebook and other well-known apps have succesfully used this strategy to create a surrounding 'spoke and hub' network of apps. The bones of this strategy is quite simple:
+Clearly this is only viable if your app is a market leader and controls access to desirable data. Twitter, Facebook and other well-known apps have succesfully used this strategy to create a surrounding 'spoke and hub' network of apps. The bones of this strategy is quite simple:
 
 	1. Become a market leader.
 	2. Maintain a useful, easy-to-use API.
@@ -131,10 +131,10 @@ Which strategies should apps adopt? None of strategies exclude the others in pra
 ####Point-to-point
 
 Motivation:
-Users often won't to see data that is hosted on different apps 'inside' another app and often the simplest way to about this is to write a translation layer in the retrieving app and hit the serving app's API.
+Users often won't to see data that is hosted on different apps 'inside' another app and often the simplest way to about this is to write a translation layer in the retrieving app and hit the serving app's API for the data.
 
 Costs:
-The cost of doing this varies depending on the nature of the data being pulled and the ease of the serving app's API. If the use-case requires only a single data entity (Posts, User account info etc) it might be equivalent to a medium to large feature. 
+The cost of doing this varies depending on the nature of the data being pulled and the ease of the serving app's API. If the use-case requires only a single data entity (Posts, User account etc) it might be equivalent to a medium to large feature. 
 
 Organisational analog:
 The Network. Providers retain control over the data. Connections between apps are ad-hoc.
@@ -144,7 +144,7 @@ When the number of apps to connect is small point-to-point integration is quite 
 
 ![](http://mathinsight.org/media/image/image/network_triangle.png)
 
-Problems can arise if either of these apps make changes to their models, their API, or as the number of apps. For example a network of 7 app's depicted in the following picture has 13 connections, more than the number of apps and it isn't fully integrated:
+Problems can arise if either of these apps make changes to their models, their API, or as the number of apps grows. For example a network of 7 app's depicted in the following picture has 13 connections, more than the number of apps and yet it isn't fully integrated:
 
 ![](http://www.nature.com/srep/2012/120608/srep00444/images/srep00444-f8.jpg)
 
@@ -159,7 +159,7 @@ As the number of apps grows linearly, the number of connections grows exponentia
 | 10        | 90               |
 | 15        | 210              |
 
-Costs increase with the number of connections. Further, A developer will find it difficult to understand the newtwork as a whole. This could make maintaining the network, or reasoning about the downstream implications of a particular point-to-point integration difficult.
+Costs increase with the number of connections. Further, A developer will find it difficult to understand the newtwork as a whole. This could make reasoning about the downstream implications of a particular point-to-point integration difficult.
 
 ![](https://www.mulesoft.com/sites/default/files/integration-complexity_2.png)
 
@@ -182,14 +182,14 @@ Hugely depends on the app's success as a market leader.
 
 The majority of current web users experience comes via large providers like Google, Facebook, Twitter etc who have pursued a central hub strategy. These providers control much of our online data. This control entails the following political consequences:
 
- 1. Most providers serve advertising or onsell user data to advertisers - as a consequence we lack online spaces free from commercial imperatives.
+ 1. Most providers serve advertising or onsell user data to advertisers - as a consequence we have a dearth of online spaces free from commercial imperatives.
 
  2. Malicious or morally ambiguous third parties (hackers, the NSA etc) may gain access to all user data through the single entry point of the Providers' servers. 
 
-The situation presents an analogue to the tesion between private and public offline spaces: when private interests control and surveil these spaces people meet and interact then these interests will often act to curtail freedoms of speech, protest and dissent.  
+The situation is analogous to the tesion between private and public offline spaces: when private interests control and surveil these spaces people meet and interact then these interests will often act to curtail freedoms of speech, protest and dissent.  
 
 
-####Integration as a service (IaaS)
+####Integration as a service
 
 Motivation and Costs:
 If the app in question only needs to integrate with market leaders ('Hubs') then paying an integration provider to perform and maintain these may well be cost-effectve compared to the equivalent developer time required to do this internally.
@@ -198,13 +198,15 @@ Organisational analog:
 The Market. 
 
 Disadvantages:
-Has the same consequences as 'Central Hub'
-If integrations form a key part of your app's value propsiton then outsourcing this to a contracted service may put you at a disadvantage later on.
+Has the same consequences as 'Central Hub'.
+If integrations form a key part of your app's value propositon then outsourcing this to a contracted service may put you at a disadvantage later on.
 
 
 ####Open Vocab
 
 Motivation:
+In contrast to the previous strategies
+
 
 Costs:
 
