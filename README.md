@@ -19,7 +19,7 @@ If you want to dive into the details of what the Loomio API could look like head
  2. Data integration is a powerful and flexible approach to integration.
  3. We advocate the 'Open Vocab' approach to data integration.
  5. [JSON-LD](http://json-ld.org/) (a data format) makes impementing the Open Vocab approach easy.
- 5. We provide details on an Open Vocab implementation using Loomio, Cobudget, and DemocracyOS API's as examples.
+ 5. We provide details on our reccomended Open Vocab implementation using Loomio, Cobudget, and DemocracyOS API's as examples.
 
 ###What do you mean by 'Data Integration'?
 
@@ -40,7 +40,7 @@ For the remainder of this article we only considers Data integration. We discuss
 
 -----
  
-##Strategies for Data Integration
+##Data Integration Strategies
 
 ###The Translation Problem
 
@@ -84,7 +84,7 @@ We know of four strategies for dealing with the 'translation problem' and integr
 
 ###Point-to-point Integration
 
-A 'Point-to-point Integration' strategy uses a *translation layer* to transform models in one app into models in another. For example, we can imagine a Loomio feature that allows users to 'Import your account details from DemocracyOS'. This would require a translation layer to translate a DemocracyOS Citizen model into a Loomio User model. 
+A 'Point-to-point Integration' strategy uses a *translation layer* to transform models in one app into models in another. We can imagine a Loomio feature that allows users to 'Import your account details from DemocracyOS'. This requires a translation layer to translate a DemocracyOS Citizen model into a Loomio User model. 
 
 ###Central Hub
 
@@ -124,7 +124,7 @@ When apps use the same vocabulary, a feature that imports data from one app can 
 
 ###Discussion
 
-Which strategies should apps adopt? None of strategies exclude the others in practice necessarily, but each has different implications if an app emphasises one or neglects another. We discuss the implications of these strategies with particular referance to the motivations, costs, disadvantages and politics of each strategy.
+Which strategies should apps adopt? None of strategies exclude the others in practice necessarily, but each has different implications in emphasis . We discuss the implications of these strategies with particular referance to the motivations, costs, disadvantages and politics of each strategy.
 
 
 
@@ -159,10 +159,9 @@ As the number of apps grows linearly, the number of connections grows exponentia
 | 10        | 90               |
 | 15        | 210              |
 
-Costs increase with the number of connections. Further, A developer will find it difficult to understand the newtwork as a whole. This could make reasoning about the downstream implications of a particular point-to-point integration difficult.
+Costs increase with the number of connections. Further, A developer will find it difficult to understand the newtwork as a whole. This could make reasoning about the downstream implications of a particular point-to-point integration and difficult.
 
 ![](https://www.mulesoft.com/sites/default/files/integration-complexity_2.png)
-
 
 ####Central Hub
 
@@ -175,10 +174,10 @@ Costs:
 This strategy costs much less than the point-to-point strategy. The central app only needs to maintain an easy-to-use API with good documentation. Connecting apps bear integration costs.
 
 Organisational analog:
-Feudalism. The Hub controls most of the data in the network. Many apps rely on the central app for functionality and are at its mercy and cotinued .
+Feudalism. The Hub controls most of the data in the network. Many apps rely on the central app for functionality.
 
 Disadvantages:
-Hugely depends on the app's success as a market leader.
+Depends on the app's success as a market leader.
 
 The majority of current web users experience comes via large providers like Google, Facebook, Twitter etc who have pursued a central hub strategy. These providers control much of our online data. This control entails the following political consequences:
 
@@ -199,19 +198,27 @@ The Market.
 
 Disadvantages:
 Has the same consequences as 'Central Hub'.
+
 If integrations form a key part of your app's value propositon then outsourcing this to a contracted service may put you at a disadvantage later on.
 
 
 ####Open Vocab
 
 Motivation:
-In contrast to the previous strategies
+We have framed the costs and benefits of previous strategies in instrumental terms - how do these weigh up for the individual app that serves the  (or more precisely, the team behind an app)? In contrast, proponents of an Open Vocab Strategy have a greater diversity of motivations:
+
+ 1. Provide low-cost integration to the connecting (client) apps. Where the 
+
+
+As with any commons-oriented project, some participants accept 
 
 
 Costs:
 
 Organisational Analog:
 The commons.
+
+Disadvanteges:
 
 ####General Discussion
 
@@ -221,17 +228,6 @@ We can see that pursuing. Self interest
 
 
 
-
-
-##Why Integrate Data?
-
-Apps host data. The hosted Loomio sevice hosts comments, votes  developers may find further uses for the data generated in other apps. When apps permit users to share data other apps can repurpose the data in different ways. Developers can focus on a particular domain where their app excels and allow other apps to deal with the related but separate problems rather than trying to develop a toolbox that does everything. 
-
-The 'blank slate' describes a common problem where a new app could be well designed and potentially useful but lacks content. The app's value may rely on having a critical mass of existing data with which the user can interact. App promoters are often caught in a catch-22 where they need users to sign up to begin adding content, but find it difficult to convince potential users to do so when this initial content does not exist. By connecting and importing data from other apps the app could 'seed' enough content and demonstrate its value to users.
-
-Users may have political or privacy concerns and wish to host their own a data themselves or with a group they trust. In the Web's current state multiple private providers host and control user data and experience. These third-party buinesss typically provide  a 'free' service to users but sell advertising, or onsell user data to sustain the business. A discussion of the private control of data vs the movement to shift control back to users themselves is beyond the scope of this article. Suffice to say that many people are not satisfied with the Web in its current state (including us!).
-
-Further, with linked data (discussed below) these terms reference others in existing standard vocabularies, meaning that these features will work for data stored in apps that are not *directly* in (or even aware of) the ecosystem. In fact, if apps decide to use a linked data format they are not required to use precisely these terms, only to link to the same term at its source vocabulary.
 
 
 ### Open Vocab Implementions with JSON-LD
