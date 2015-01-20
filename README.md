@@ -84,7 +84,7 @@ We know of four strategies for dealing with the 'translation problem' and integr
 
 ###Point-to-point Integration
 
-A 'Point-to-point Integration' strategy uses a *translation layer* to transform models in one app into models in another. For example, we can imagine a Loomio feature that allows users to 'Import your account details from DemocracyOS'. This would require a 'translation layer' for translating a Citizen model into a Loomio User model. 
+A 'Point-to-point Integration' strategy uses a *translation layer* to transform models in one app into models in another. For example, we can imagine a Loomio feature that allows users to 'Import your account details from DemocracyOS'. This would require a translation layer to translate a DemocracyOS Citizen model into a Loomio User model. 
 
 ###Central Hub
 
@@ -124,7 +124,7 @@ When apps use the same vocabulary, a feature that imports data from one app can 
 
 ###Discussion
 
-Which strategies should apps adopt? None of strategies preclude the others necessarily, but each has different implications in terms of costs, values, power and motivation. We discuss the implications of these strategies wit particular referance to the 
+Which strategies should apps adopt? None of strategies exclude the others in practice necessarily, but each has different implications if an app emphasises one or neglects another. We discuss the implications of these strategies with particular referance to the motivations, costs, disadvantages and politics of each strategy.
 
 
 
@@ -159,7 +159,7 @@ As the number of apps grows linearly, the number of connections grows exponentia
 | 10        | 90               |
 | 15        | 210              |
 
-Costs increase with the number of connections. Further, A developer will find it difficult to understand the newtwork as a whole. This could make maintaining the network, or reasoning  about the downstream implications of a particular point-to-point integration difficult.
+Costs increase with the number of connections. Further, A developer will find it difficult to understand the newtwork as a whole. This could make maintaining the network, or reasoning about the downstream implications of a particular point-to-point integration difficult.
 
 ![](https://www.mulesoft.com/sites/default/files/integration-complexity_2.png)
 
@@ -167,34 +167,49 @@ Costs increase with the number of connections. Further, A developer will find it
 ####Central Hub
 
 Motivation:
-The central hub strategy is low cost and can consolidate a market leader's position. 
-
-Every app that connects and relies on the Hub's API has the incentive for the hub app to maintain a leading positon. These other apps also do their own marketing and promote the hub app by proxy.
+Every app that connects and relies on the Hub's API has the incentive for the Hub to maintain a leading positon. These other apps also do their own marketing and promote the hub app by proxy.
 
 For example, [Medium](http://medium.com/) users must have a Twitter account. Medium was founded by one of the Twitter cofounders who clearly has an incentive to promote Twitter to Medium users. 
 
 Costs:
-Costs are much lower than the point-to-point strategy. The central app only needs to maintain an easy-to-use API with good documentation. Connecting apps bear integration costs.
+This strategy costs much less than the point-to-point strategy. The central app only needs to maintain an easy-to-use API with good documentation. Connecting apps bear integration costs.
 
 Organisational analog:
-Feudalism. The central app provider controls most of the data in the network. Many apps rely on the central app for functionality. Others supplement.
+Feudalism. The Hub controls most of the data in the network. Many apps rely on the central app for functionality and are at its mercy and cotinued .
 
 Disadvantages:
-The majority of current web users experience comes via large providers like Google, Facebook, Twitter etc who have pursued a central hub strategy. These providers have control over much of the online data. This control entails the following political consequences:
+Hugely depends on the app's success as a market leader.
 
- 1. Most providers serve advertising or onsell user data to advertisers - we lack online spaces free from commercial imperatives.
+The majority of current web users experience comes via large providers like Google, Facebook, Twitter etc who have pursued a central hub strategy. These providers control much of our online data. This control entails the following political consequences:
+
+ 1. Most providers serve advertising or onsell user data to advertisers - as a consequence we lack online spaces free from commercial imperatives.
 
  2. Malicious or morally ambiguous third parties (hackers, the NSA etc) may gain access to all user data through the single entry point of the Providers' servers. 
 
- The situation presents an analogue to the offline spaces: when private interests control and surveil the spaces people meet and interact then these interests will often act to curtail freedoms of speech, protest and dissent.  
+The situation presents an analogue to the tesion between private and public offline spaces: when private interests control and surveil these spaces people meet and interact then these interests will often act to curtail freedoms of speech, protest and dissent.  
 
 
-####Integration as a service
+####Integration as a service (IaaS)
 
-Motivation:
+Motivation and Costs:
+If the app in question only needs to integrate with market leaders ('Hubs') then paying an integration provider to perform and maintain these may well be cost-effectve compared to the equivalent developer time required to do this internally.
+
+Organisational analog:
+The Market. 
+
+Disadvantages:
+Has the same consequences as 'Central Hub'
+If integrations form a key part of your app's value propsiton then outsourcing this to a contracted service may put you at a disadvantage later on.
 
 
 ####Open Vocab
+
+Motivation:
+
+Costs:
+
+Organisational Analog:
+The commons.
 
 ####General Discussion
 
