@@ -15,15 +15,15 @@ If you want to dive into the details of what the Loomio API could look like head
 
 ###Main points
 
- 1. 'Integrating apps' can mean different things.
- 2. Data integration is a powerful and flexible approach to integration.
+ 1. 'Integrating apps' means different things.
+ 2. Data integration is a powerful and flexible means of integration.
  3. We advocate the 'Open Vocab' approach to data integration.
  5. [JSON-LD](http://json-ld.org/) (a data format) makes impementing the Open Vocab approach easy.
- 5. We provide details on our reccomended Open Vocab implementation using Loomio, Cobudget, and DemocracyOS API's as examples.
+ 5. We detail our reccomended Open Vocab implementation using Loomio, Cobudget, and DemocracyOS API's as examples.
 
 ###What do you mean by 'Data Integration'?
 
-Software integration can occur at three different levels:
+Software integration occurs at three levels:
  1. User Interface (UI),
  2. Business Logic aka 'Services', and
  3. Data
@@ -74,32 +74,94 @@ profile_url:
 
 Both of these include the term ```username``` which is undoubtedly the same concept. Other properties use different terms e.g. ```profile_url``` (Loomio) is the same concept as ```profilePictureUrl``` (DemocracyOS). The 'name' concept is specified as ```name``` in Loomio but split across ```firstName``` and ```lastName``` in DemocracyOS. Humans can recognise ```profile_url``` and ```profilePictureUrl``` as the same concept but machines are not so smart! Further complications can arise when properties are formatted in different ways. Dates and time data might have the same property name ```createdAt``` but use different date formats. 
 
-###Data Integration Strategies
-
 We know of four strategies for dealing with the 'translation problem' and integrating data between apps:
  1. 'Point-to-point Integration',
  2. 'Central Hub',
  3. 'Integration as a Service', and
  4. 'Open Vocab'
 
+Which strategies should apps adopt? None of strategies exclude the others in practice, but each has different implications in emphasis . We outline and discuss the implications of these strategies with particular referance to motivations, costs, disadvantages and politics.
+
 ###Point-to-point Integration
 
 A 'Point-to-point Integration' strategy uses a *translation layer* to transform models in one app into models in another. We can imagine a Loomio feature that allows users to 'Import your account details from DemocracyOS'. This requires a translation layer to translate a DemocracyOS Citizen model into a Loomio User model. 
+
+**Motivation:**
+Users often won't to see data that is hosted on different apps 'inside' another app and often the simplest way to about this is to write a translation layer in the retrieving app and hit the serving app's API for the data.
+
+**Costs:**
+The cost of doing this varies depending on the nature of the data being pulled and the ease of the serving app's API. If the use-case requires only a single data entity (Posts, User account etc) it might be equivalent to a medium to large feature. 
+
+**Organisational analog:**
+The Network. Providers retain control over the data. Connections between apps are ad-hoc.
+
+**Disadvantages:**
+When the number of apps to connect is small point-to-point integration is quite manageable. A network of three app's requires only six connections to be fully integrated:
+
+<img src="http://mathinsight.org/media/image/image/network_triangle.png" style="height:200px">
+
+Problems can arise if either of these apps make changes to their models, their API, or as the number of apps grows. For example a network of 7 app's depicted in the following picture has 13 connections, more than the number of apps and yet it isn't fully integrated:
+
+<img src="http://www.nature.com/srep/2012/120608/srep00444/images/srep00444-f8.jpg" style="height:200px">
+
+As the number of apps grows linearly, the number of connections grows exponentially. Assuming that all apps need integration with every other app then number of connectons will equal ```n^2 - n``` where ```n``` is the number of apps. E.g:
+
+| # of apps | # of connections |
+|-----------|------------------|
+| 2         | 2                |
+| 3         | 6                |
+| 4         | 12               |
+| 5         | 20               |
+| 10        | 90               |
+| 15        | 210              |
+
+Costs increase with the number of connections. Further, A developer will find it difficult to understand the newtwork as a whole. This could make reasoning about the downstream implications of a particular point-to-point integration and difficult.
+
+<img src="https://www.mulesoft.com/sites/default/files/integration-complexity_2.png" style="height:200px">
 
 ###Central Hub
 
 The 'Central Hub' strategy puts the onus of connecting and writing translation layers on the other apps that want your data!
 
-Clearly this is only viable if your app is a market leader and controls access to desirable data. Twitter, Facebook and other well-known apps have succesfully used this strategy to create a surrounding 'spoke and hub' network of apps. The bones of this strategy is quite simple:
+Clearly this is only viable if your app is a market leader and controls access to desirable data. Twitter, Facebook and other well-known apps have succesfully used this strategy to create a surrounding 'spoke and hub' network of apps. 
 
-	1. Become a market leader.
-	2. Maintain a useful, easy-to-use API.
+**Motivation:**
+Every app that connects and relies on the Hub's API has the incentive for the Hub to maintain a leading positon. These other apps also do their own marketing and promote the hub app by proxy.
 
-Well, perhaps #1 is not so simple. 
+For example, [Medium](http://medium.com/) users must have a Twitter account. Medium was founded by one of the Twitter cofounders who clearly has an incentive to promote Twitter to Medium users. 
+
+**Costs:**
+This strategy costs much less than the point-to-point strategy. The central app only needs to maintain an easy-to-use API with good documentation. Connecting apps bear integration costs.
+
+**Organisational analog:**
+Feudalism. The Hub controls most of the data in the network. Many apps rely on the central app for functionality.
+
+**Disadvantages:**
+
+Today, the majority of current web users experience comes via large providers like Google, Facebook, and Twitter who have pursued a central hub strategy. These providers control much of our online data. This control entails the following political consequences:
+
+ 1. Most of these providers serve advertising or onsell user data to advertisers - consequently we lack online spaces free from commercial imperatives.
+
+ 2. Malicious or morally ambiguous third parties (hackers, the NSA etc) may gain access to all user data through the single entry point of the Providers' servers. 
+
+The situation is analogous to the tesion between private and public offline spaces: when private interests control and surveil these spaces people meet and interact then these interests will often act to curtail freedoms of speech, protest and dissent.  
+
 
 ###Integration as a Service
 
 A number of ventures offer [Integration as a Service](https://www.mulesoft.com/resources/cloudhub/integration-as-a-service). The integration platform translates data from market leaders into their own representation. Apps need only connect once to the platform and purchase integration with several leading apps as package deals.
+
+**Motivation and Costs:**
+If the app in question only needs to integrate with market leaders ('Hubs') then paying an integration provider to perform and maintain these may well be cost-effectve compared to the equivalent developer time required to do this internally.
+
+**Organisational analog:**
+The Market. 
+
+**Disadvantages:**
+Has the same consequences as 'Central Hub'.
+
+If integrations form a key part of your app's value propositon then outsourcing this to a contracted service may put you at a disadvantage later on.
+
 
 ###Open Vocab
 
@@ -120,105 +182,30 @@ groups:
 
 When apps use the same vocabulary, a feature that imports data from one app can also work for *any* other app that also uses the same vocabulary.  
 
-*also known as an [ontology](http://en.wikipedia.org/wiki/Ontology_(information_science))
+**Motivation:**
+We have framed the costs and benefits of previous strategies in instrumental terms - how do these weigh up for an individual app (or more precisely, the team behind an app)? Broader concerns besides self-interest motivate the Open Vocab strategy:
 
-###Discussion
+ 1. Provide low-cost integration for connecting (client) apps. Whereas the Central Hub strategy offloads the integration costs to the connecting apps and leverages its dominant position, the Open Vocab proponent assumes that they are merely one data provider in an open network of similar providers. Standard vocabularies allow connecting apps to use one translation layer per model rather than an exponentially growing number of translation layers as outlined above.
 
-Which strategies should apps adopt? None of strategies exclude the others in practice necessarily, but each has different implications in emphasis . We discuss the implications of these strategies with particular referance to the motivations, costs, disadvantages and politics of each strategy.
+ Low cost integration is one of the principles of [Commons Based Peer Production](http://en.wikipedia.org/wiki/Commons-based_peer_production#Principles)
 
+ 2. Mitigate the security vulnerabilities of centrally hosted data. Open vocabs help faciltate a Web where individuals and groups can host their own data while still connecting to other individuals and groups in the network who do the same. 
 
+**Costs:**
 
-####Point-to-point
-
-Motivation:
-Users often won't to see data that is hosted on different apps 'inside' another app and often the simplest way to about this is to write a translation layer in the retrieving app and hit the serving app's API for the data.
-
-Costs:
-The cost of doing this varies depending on the nature of the data being pulled and the ease of the serving app's API. If the use-case requires only a single data entity (Posts, User account etc) it might be equivalent to a medium to large feature. 
-
-Organisational analog:
-The Network. Providers retain control over the data. Connections between apps are ad-hoc.
-
-Disadvantages:
-When the number of apps to connect is small point-to-point integration is quite manageable. A network of three app's requires only six connections to be fully integrated:
-
-[[http://mathinsight.org/media/image/image/network_triangle.png|height=200px]]
-
-Problems can arise if either of these apps make changes to their models, their API, or as the number of apps grows. For example a network of 7 app's depicted in the following picture has 13 connections, more than the number of apps and yet it isn't fully integrated:
-
-[[http://www.nature.com/srep/2012/120608/srep00444/images/srep00444-f8.jpg|height=200px]]
-
-As the number of apps grows linearly, the number of connections grows exponentially. Assuming that all apps need integration with every other app then number of connectons will equal ```n^2 - n``` where ```n``` is the number of apps. E.g:
-
-| # of apps | # of connections |
-|-----------|------------------|
-| 2         | 2                |
-| 3         | 6                |
-| 4         | 12               |
-| 5         | 20               |
-| 10        | 90               |
-| 15        | 210              |
-
-Costs increase with the number of connections. Further, A developer will find it difficult to understand the newtwork as a whole. This could make reasoning about the downstream implications of a particular point-to-point integration and difficult.
-
-[[https://www.mulesoft.com/sites/default/files/integration-complexity_2.png|height=200px]]
-
-####Central Hub
-
-Motivation:
-Every app that connects and relies on the Hub's API has the incentive for the Hub to maintain a leading positon. These other apps also do their own marketing and promote the hub app by proxy.
-
-For example, [Medium](http://medium.com/) users must have a Twitter account. Medium was founded by one of the Twitter cofounders who clearly has an incentive to promote Twitter to Medium users. 
-
-Costs:
-This strategy costs much less than the point-to-point strategy. The central app only needs to maintain an easy-to-use API with good documentation. Connecting apps bear integration costs.
-
-Organisational analog:
-Feudalism. The Hub controls most of the data in the network. Many apps rely on the central app for functionality.
-
-Disadvantages:
-Depends on the app's success as a market leader.
-
-The majority of current web users experience comes via large providers like Google, Facebook, Twitter etc who have pursued a central hub strategy. These providers control much of our online data. This control entails the following political consequences:
-
- 1. Most providers serve advertising or onsell user data to advertisers - as a consequence we have a dearth of online spaces free from commercial imperatives.
-
- 2. Malicious or morally ambiguous third parties (hackers, the NSA etc) may gain access to all user data through the single entry point of the Providers' servers. 
-
-The situation is analogous to the tesion between private and public offline spaces: when private interests control and surveil these spaces people meet and interact then these interests will often act to curtail freedoms of speech, protest and dissent.  
-
-
-####Integration as a service
-
-Motivation and Costs:
-If the app in question only needs to integrate with market leaders ('Hubs') then paying an integration provider to perform and maintain these may well be cost-effectve compared to the equivalent developer time required to do this internally.
-
-Organisational analog:
-The Market. 
-
-Disadvantages:
-Has the same consequences as 'Central Hub'.
-
-If integrations form a key part of your app's value propositon then outsourcing this to a contracted service may put you at a disadvantage later on.
-
-
-####Open Vocab
-
-Motivation:
-We have framed the costs and benefits of previous strategies in instrumental terms - how do these weigh up for the individual app that serves the  (or more precisely, the team behind an app)? In contrast, proponents of an Open Vocab Strategy have a greater diversity of motivations:
-
- 1. Provide low-cost integration to the connecting (client) apps. Where the 
-
-
-As with any commons-oriented project, some participants accept 
-
-
-Costs:
-
-Organisational Analog:
+**Organisational analog:**
 The commons.
 
 Disadvanteges:
+
+
+*also known as an [ontology](http://en.wikipedia.org/wiki/Ontology_(information_science))
+
+
+
+
+
+
 
 ####General Discussion
 
