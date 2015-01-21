@@ -46,8 +46,6 @@ For the remainder of this article we only considers Data integration. We discuss
  
 ##Data Integration Strategies
 
-----
-
 ###The Translation Problem
 
 Developers represent the same or similar data in their apps in different ways. Developers call these representations [models](http://en.wikipedia.org/wiki/Data_model).
@@ -105,11 +103,11 @@ The Network. Providers retain control over the data. Connections between apps ar
 **Disadvantages:**
 When the number of apps to connect is small point-to-point integration is quite manageable. A network of three app's requires only six connections to be fully integrated:
 
-<img src="http://mathinsight.org/media/image/image/network_triangle.png" style="width:100px">
+<img src="http://mathinsight.org/media/image/image/network_triangle.png" width="100px">
 
 Problems can arise if either of these apps make changes to their models, their API, or as the number of apps grows. For example a network of 7 app's depicted in the following picture has 13 connections, more than the number of apps, yet it isn't fully integrated:
 
-<img src="http://www.nature.com/srep/2012/120608/srep00444/images/srep00444-f8.jpg" style="width:100px">
+<img src="http://www.nature.com/srep/2012/120608/srep00444/images/srep00444-f8.jpg" width="100px">
 
 As the number of apps grows linearly, the number of connections grows exponentially. Assuming that all apps need integration with every other app then number of connectons will equal ```n^2 - n``` where ```n``` is the number of apps. E.g:
 
@@ -124,7 +122,7 @@ As the number of apps grows linearly, the number of connections grows exponentia
 
 Costs increase with the number of connections. A developer will also find it difficult to understand the network as a whole. This could make reasoning about the downstream implications of a particular point-to-point integration difficult.
 
-<img src="https://www.mulesoft.com/sites/default/files/integration-complexity_2.png" style="width:100px">
+<img src="https://www.mulesoft.com/sites/default/files/integration-complexity_2.png" width="100px">
 
 
 ---
