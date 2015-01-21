@@ -3,24 +3,28 @@
 
 ##Introduction
 
+This article decribes strategies for integrating web apps and reccommends an approach that provides bro
+
+
 ###How to use this article
 
-This article assumes you're familiar with some basic technical terms of the Web but is written with non-technical audience in mind. You will need to understand what [API](http://en.wikipedia.org/wiki/Application_programming_interface) means. 
+We assume you're familiar with some basic technical terms of the Web but have written this article with a non-technical audience in mind. For example, ou will need to understand what [API](http://en.wikipedia.org/wiki/Application_programming_interface) means. 
 
-If you want a high-level of overview of how a subset of software integration works read the rest of the Introduction and Stratgies for Data Integration.
+If you want a high-level of overview of how an important subset of software integration works and the implications of diffirent strategies read [What do you mean by 'Data Integration'?](#What do you mean by 'Data Integration'?) followed by [Data Integration Strategies](#Data Integration Strategies).
 
-If you want to understand how Linked Data and JSON-LD work continue on with 'Open Vocab Implementations with JSON-LD'.
+If you're already confident in the Open Vocab approach and want to understand how Linked Data and JSON-LD work continue on with [Open Vocab Implementations with JSON-LD](#Open Vocab Implementations with JSON-LD).
 
-If you want to dive into the details of what the Loomio API could look like head to 'Data Entities'.
+If you want to dive into the details of what the Loomio and Cobudget's APIs could look like head to [Data Entities](#Data Entities).
 
 ###Main points
 
- 1. 'Integrating apps' means different things.
+ 1. App integration can mean different things.
  2. Data integration is a powerful and flexible means of integration.
- 3. We advocate the 'Open Vocab' approach to data integration.
+ 3. We advocate the Open Vocab approach to data integration.
  5. [JSON-LD](http://json-ld.org/) (a data format) makes impementing the Open Vocab approach easy.
- 5. We detail our reccomended Open Vocab implementation using Loomio, Cobudget, and DemocracyOS API's as examples.
+ 5. We detail our reccommended Open Vocab implementation using Loomio, Cobudget, and DemocracyOS API's as examples.
 
+---
 ###What do you mean by 'Data Integration'?
 
 Software integration occurs at three levels:
@@ -34,20 +38,21 @@ Integrating at the Business Logic level means that apps rely on common 'services
 
 Integrating at the Data level means that an app can read from (and potentially write to) different sources of data. For example, DemocracyOS and Loomio may independently publish data through their APIs about decisions or discussions happening around particular topics or in particular regions. A third party app might pull data from these apps, aggregate it, and present the user with a feed of 'discussions happening in your region', or 'curent discussions on topc X'. 
 
-We can think of data integration as a 'substrate' layer on top of which we can build further integrated features and apps. Data integration makes it possible to recreate the same UI elements of one app within another. Similarly, data integration makes it possible to use an app as a service for another app. The reverse is not true and there are also functions that only data integration can provide that the other kinds of integration cannot. 
+We can think of data integration as a 'substrate' layer on top of which we can build further integrated features and apps. Data integration makes it possible to recreate the same UI elements of one app within another. Similarly, data integration makes it possible to use an app as a service for another app. The reverse is not true and there are also functionality that only data integration can provide that the other kinds of integration cannot. 
 
 For the remainder of this article we only considers Data integration. We discuss UI and Business Logic integration separately in forthcoming articles.
 
 -----
------
  
 ##Data Integration Strategies
+
+----
 
 ###The Translation Problem
 
 Developers represent the same or similar data in their apps in different ways. Developers call these representations [models](http://en.wikipedia.org/wiki/Data_model).
 
-For example, user account details are stored in a model known as a [User](https://github.com/loomio/loomio/blob/master/app%2Fserializers%2Fuser_serializer.rb) in Loomio, but [Citizen](https://github.com/DemocracyOS/app/blob/development/lib/models/citizen.js) in DemocracyOS. The developer teams have specified these models with slightly different terminology. In DemocracyOS a ```Citizen``` includes the following properties:
+For example, user account details are stored in a model known as a [User](https://github.com/loomio/loomio/blob/master/app%2Fserializers%2Fuser_serializer.rb) in Loomio, but [Citizen](https://github.com/DemocracyOS/app/blob/development/lib/models/citizen.js) in DemocracyOS. The respective developer teams have specified these models with slightly different terminology. In DemocracyOS a ```Citizen``` includes the following properties:
 
 ```
 firstName:
@@ -86,13 +91,13 @@ Which strategies should apps adopt? None of strategies *exclude* the others in p
 ---
 ###Point-to-point Integration
 
-A 'Point-to-point Integration' strategy uses a *translation layer* to transform models in one app into models in another. We can imagine a Loomio feature that allows users to 'Import your account details from DemocracyOS'. This requires a translation layer to translate a DemocracyOS Citizen model into a Loomio User model. 
+A 'Point-to-point Integration' strategy uses a *translation layer* to transform models in one app into models in another. We can imagine a Loomio feature that allows users to 'Import your account details from DemocracyOS'. This requires a translation layer to translate a DemocracyOS ```Citizen``` model and the relevant properties into a Loomio ```User``` model. 
 
 **Motivation:**
-Users often won't to see data that is hosted on different apps 'inside' another app and often the simplest way to about this is to write a translation layer in the retrieving app and hit the serving app's API for the data.
+Often the simplest way to do data integration is to write a translation layer in the retrieving app and hit the serving app's API for the data.
 
 **Costs:**
-The cost of doing this varies depending on the nature of the data being pulled and the ease of the serving app's API. If the use-case requires only a single data entity (Posts, User account etc) it might be equivalent to a medium to large feature. 
+The cost of doing this varies depending on the nature of the data being pulled, the ease of the serving app's API and whether they the two data representations need to be kept in sync. If the use-case requires only a single data entity (Posts, User account etc) it might be equivalent to a medium to large feature. 
 
 **Organisational analog:**
 The Network. Providers retain control over the data. Connections between apps are ad-hoc.
@@ -125,12 +130,12 @@ Costs increase with the number of connections. A developer will also find it dif
 ---
 ###Central Hub
 
-The 'Central Hub' strategy puts the onus of connecting and writing translation layers on the other apps that want your data!
+The Central Hub strategy puts the onus of connecting and writing translation layers on the other apps that want your data!
 
-Clearly this is only viable if your app is a market leader and controls access to desirable data. Twitter, Facebook and other well-known apps have succesfully used this strategy to create a surrounding 'spoke and hub' network of apps. 
+Clearly this is only viable if your app is a market leader and hosts desirable data. Twitter, Facebook and other well-known apps have succesfully used this strategy to create a surrounding 'spoke and hub' network of apps. 
 
 **Motivation:**
-Every app that connects and relies on the Hub's API has the incentive for the Hub to maintain a leading positon. These other apps may also do their own marketing and promote the Hub by proxy. For example, [Medium](http://medium.com/) users must have a Twitter account. Medium was founded by one of the Twitter cofounders who clearly has an incentive to promote Twitter and extend the 'Twittersphere'. 
+Every app that connects and relies on the Hub's API has the incentive for the Hub to maintain a leading positon. These other apps may also do their own marketing and promote the Hub by proxy. For example, [Medium](http://medium.com/) requires users to have a Twitter account. Medium was founded by one of the Twitter cofounders who clearly has an incentive to promote Twitter and extend the 'Twittersphere'. 
 
 **Costs:**
 This strategy costs much less than the point-to-point strategy. The central app only needs to maintain an easy-to-use API with good documentation. Connecting apps bear integration costs.
@@ -142,21 +147,21 @@ Feudalism. The Hub controls most of the data in the network. Many apps rely on t
 
 Today, the majority of current web users experience comes via large providers like Google, Facebook, and Twitter who have pursued a central hub strategy. These providers control much of our online data. This control entails the following political consequences:
 
- 1. Most of these providers serve advertising or onsell user data to advertisers - we lack online spaces free from commercial imperatives.
+ 1. **Commercial logics dominate**. Most of these providers serve advertising or onsell user data to advertisers - we lack online spaces free from commercial imperatives.
 
- 2. Malicious or morally ambiguous third parties (hackers, the NSA etc) may gain access to all user data through the single entry point of the Providers' servers. 
+ 2. **Fragile security**. Malicious or morally ambiguous third parties (hackers, the NSA etc) might gain access to all user data through a single entry point.
 
-The situation is analogous to the tension between private and public offline spaces: when private interests control and surveil these spaces people meet and interact then these interests will often act to curtail freedoms of speech, protest and dissent.  
+ 3. **Fragile user rights**. The business behind the Hub app may go bust, or another business may buy it prompting a revison in the Terms of Service and degradation of user rights.
 
-In addition the team behind the Hub app may go bust.
+The situation is analogous to the use private offline spaces for public good purposes: when private interests control and surveil the spaces where people meet and interact then these interests will often act to curtail freedoms of speech, protest and dissent. For more information on this persepctive please see [@anildash](https://github.com/anildash)'s talk [The Web We Lost](http://dashes.com/anil/2012/12/the-web-we-lost.html)
 
-
+---
 ###Integration as a Service
 
 A number of ventures offer [Integration as a Service](https://www.mulesoft.com/resources/cloudhub/integration-as-a-service). The integration platform translates data from market leaders into their own representation. Apps need only connect once to the platform and purchase integration with several leading apps as package deals.
 
 **Motivation and Costs:**
-If the app in question only needs integration with market leaders (i.e. 'Hubs') then paying an integration provider to perform and maintain these may well be cost-effectve compared to the equivalent developer time required to do this internally.
+If the app in question only needs integration with market leaders (i.e. the 'Hubs') then paying an integration provider to perform and maintain these may well be cost-effectve compared to the equivalent developer time required to do this internally.
 
 **Organisational analog:**
 The Market. 
@@ -166,13 +171,12 @@ Has the same consequences as 'Central Hub'.
 
 If integrations form a key part of your app's value propositon then outsourcing this to a contracted service may put your team at a disadvantage later on.
 
-
+---
 ###Open Vocab
 
-Open Vocab is more commonly known as [Semantic Interoperability](http://en.wikipedia.org/wiki/Semantic_interoperability). For this strategy app developers agree to use a common, open vocabulary* in their API's. 
+Open Vocab is more commonly known as [Semantic Interoperability](http://en.wikipedia.org/wiki/Semantic_interoperability). Here, developers agree to use a common, open vocabulary* in their API's. 
 
-
-For example, the OpenVocab team has specified the same User concept decribed above as a [Person](https://github.com/openvocab/person/blob/master/index.js) with the following properties:
+To illustrate, the OpenVocab team has specified the same User concept decribed above as a [Person](https://github.com/openvocab/person/blob/master/index.js) with the following properties:
 ```
 name:
 handle:
@@ -187,21 +191,27 @@ groups:
 When apps use the same vocabulary, a feature that imports data from one app can also work for *any* other app that also uses the same vocabulary.  
 
 **Motivation:**
-We have framed the costs and benefits of previous strategies in instrumental terms - how do these weigh up for the team behind an app? Broader concerns besides self-interest motivate the Open Vocab strategy:
+We have framed the costs and benefits of previous strategies in instrumental terms - how do these weigh up for each app and its team? Broader concerns besides self-interest motivate an Open Vocab strategy:
 
- 1. Provide low-cost integration for connecting (client) apps. Whereas the Central Hub strategy offloads the integration costs to the connecting apps and leverages its dominant position, the Open Vocab particpant assumes that they are merely one data provider in an open network of similar providers. Standard vocabularies allow connecting apps to use one translation layer per model rather than an exponentially growing number of translation layers as outlined above.
+ 1. Provide **low-cost integration** for connecting (client) apps. Whereas an app following the Central Hub strategy offloads the integration costs to the connecting apps and leverages its central position, the Open Vocab particpant assumes that they are merely *one data provider in an open network of similar providers*. Standard vocabularies allow connecting apps to use one translation layer per model rather than the exponentially growing number of translation layers as outlined above. We believe this will dramatically lower costs (compared to point-to-point) for *the network as a whole* once it grows beyond a small number of apps.
 
  Low cost integration is one of the principles of [Commons Based Peer Production](http://en.wikipedia.org/wiki/Commons-based_peer_production#Principles)
 
- 2. Mitigate the security vulnerabilities of centrally hosted data. Open vocab faciltates a Web where individuals and groups can host their own data while still connecting to other individuals and groups in the network who do the same. 
+ 2. **Mitigate the security vulnerabilities of centrally hosted data**. Open vocab helps faciltate a Web where individuals and groups host their own data while still connecting to public data and other trusted individuals and groups in the network. This point does require more technical backing than Open Vocab. We plan to use [Secure Scuttlebut](https://github.com/ssbc) for much of this.
 
-**Costs:**
+ 3. **Shift power from large providers towards indivduals and groups.** As above, users need not submit to any Terms of Service or fear the loss of their data when they host it themselves. This aligns OpenApp with the [IndieWeb](http://www.wired.co.uk/news/archive/2013-08/15/indie-web) and [unhosted](https://unhosted.org/) movements.
+
+**Costs and Disadvantages:**
+The costs come from:
+ 1. Agreeing to a standard vocab, composing this vocab from existing standards, and writing our own when existing ones are not appropriate. In OpenApp, the OpenVocab team faciliate these tasks.
+
+ 2. For serving apps, modifying or implementing API's that conform to the above standards. Fortunately JSON-LD makes this somewhat easier than this would otherwise be (discussed below).
+
+ 3. For client apps, implementing JSON-LD tooling and the **single** translation layer between the OpenVocab model in question and their own representation.
+
 
 **Organisational analog:**
-The commons.
-
-Disadvanteges:
-
+The Commons.
 
 *also known as an [ontology](http://en.wikipedia.org/wiki/Ontology_(information_science))
 
