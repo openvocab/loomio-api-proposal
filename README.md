@@ -3,12 +3,13 @@
 
 ##Introduction
 
-This article decribes strategies for integrating web apps and reccommends an approach that provides bro
+This article gives an overview of software integration, outlines four strategies for a particular type of integration: 'data integration', reccommends one of the outlined strategies 'Open Vocab', and provides implementation details for that strategy with reference to Loomio, Cobudget and DemocracyOS.
 
+We align the OpenApp project and our reccomendations with the [IndieWeb](http://www.wired.co.uk/news/archive/2013-08/15/indie-web) and [unhosted](https://unhosted.org/) movements and the process outlined in [Rebuilding the Web We Lost](http://dashes.com/anil/2012/12/rebuilding-the-web-we-lost.html). Accordingly, we value tools and processes that promote open, democratic participation and where users control their own data. 
 
 ###How to use this article
 
-We assume you're familiar with some basic technical terms of the Web but have written this article with a non-technical audience in mind. For example, ou will need to understand what [API](http://en.wikipedia.org/wiki/Application_programming_interface) means. 
+We've written this article with a non-technical audience in mind but still assume you're familiar with some basic technical terms of the Web. For example, you will need to understand what [API](http://en.wikipedia.org/wiki/Application_programming_interface) means. 
 
 If you want a high-level of overview of how an important subset of software integration works and the implications of diffirent strategies read [What do you mean by 'Data Integration'?](#What do you mean by 'Data Integration'?) followed by [Data Integration Strategies](#Data Integration Strategies).
 
@@ -16,16 +17,8 @@ If you're already confident in the Open Vocab approach and want to understand ho
 
 If you want to dive into the details of what the Loomio and Cobudget's APIs could look like head to [Data Entities](#Data Entities).
 
-###Main points
-
- 1. App integration can mean different things.
- 2. Data integration is a powerful and flexible means of integration.
- 3. We advocate the Open Vocab approach to data integration.
- 5. [JSON-LD](http://json-ld.org/) (a data format) makes impementing the Open Vocab approach easy.
- 5. We detail our reccommended Open Vocab implementation using Loomio, Cobudget, and DemocracyOS API's as examples.
-
 ---
-###What do you mean by 'Data Integration'?
+###Types of Integration
 
 Software integration occurs at three levels:
  1. User Interface (UI),
@@ -44,7 +37,7 @@ For the remainder of this article we only considers Data integration. We discuss
 
 -----
  
-##Data Integration Strategies
+## Part I: Data Integration Strategies
 
 ###The Translation Problem
 
@@ -97,7 +90,7 @@ Often the simplest way to do data integration is to write a translation layer in
 **Costs:**
 The cost of doing this varies depending on the nature of the data being pulled, the ease of the serving app's API and whether they the two data representations need to be kept in sync. If the use-case requires only a single data entity (Posts, User account etc) it might be equivalent to a medium to large feature. 
 
-**Organisational analog:**
+**Analog organisation:**
 The Network. Providers retain control over the data. Connections between apps are ad-hoc.
 
 **Disadvantages:**
@@ -107,7 +100,7 @@ When the number of apps to connect is small point-to-point integration is quite 
 
 Problems can arise if either of these apps make changes to their models, their API, or as the number of apps grows. For example a network of 7 app's depicted in the following picture has 13 connections, more than the number of apps, yet it isn't fully integrated:
 
-<img src="http://www.nature.com/srep/2012/120608/srep00444/images/srep00444-f8.jpg" width="100px">
+<img src="http://www.nature.com/srep/2012/120608/srep00444/images/srep00444-f8.jpg" width="200px">
 
 As the number of apps grows linearly, the number of connections grows exponentially. Assuming that all apps need integration with every other app then number of connectons will equal ```n^2 - n``` where ```n``` is the number of apps. E.g:
 
@@ -122,7 +115,7 @@ As the number of apps grows linearly, the number of connections grows exponentia
 
 Costs increase with the number of connections. A developer will also find it difficult to understand the network as a whole. This could make reasoning about the downstream implications of a particular point-to-point integration difficult.
 
-<img src="https://www.mulesoft.com/sites/default/files/integration-complexity_2.png" width="100px">
+<img src="https://www.mulesoft.com/sites/default/files/integration-complexity_2.png">
 
 
 ---
@@ -138,7 +131,7 @@ Every app that connects and relies on the Hub's API has the incentive for the Hu
 **Costs:**
 This strategy costs much less than the point-to-point strategy. The central app only needs to maintain an easy-to-use API with good documentation. Connecting apps bear integration costs.
 
-**Organisational analog:**
+**Analog organisation:**
 Feudalism. The Hub controls most of the data in the network. Many apps rely on the central app for functionality.
 
 **Disadvantages:**
@@ -161,7 +154,7 @@ A number of ventures offer [Integration as a Service](https://www.mulesoft.com/r
 **Motivation and Costs:**
 If the app in question only needs integration with market leaders (i.e. the 'Hubs') then paying an integration provider to perform and maintain these may well be cost-effectve compared to the equivalent developer time required to do this internally.
 
-**Organisational analog:**
+**Analog organisation:**
 The Market. 
 
 **Disadvantages:**
@@ -186,60 +179,74 @@ memberships:
 groups:
 ```
 
-When apps use the same vocabulary, a feature that imports data from one app can also work for *any* other app that also uses the same vocabulary.  
+When apps use the same vocabulary a feature that imports data from one app can also work for *any* other app that also uses the same vocabulary.  
 
 **Motivation:**
-We have framed the costs and benefits of previous strategies in instrumental terms - how do these weigh up for each app and its team? Broader concerns besides self-interest motivate an Open Vocab strategy:
+We have framed the costs and benefits of previous strategies in instrumental terms - how do these weigh up for each app and the team behind it? Broader concerns motivate an Open Vocab strategy:
 
  1. Provide **low-cost integration** for connecting (client) apps. Whereas an app following the Central Hub strategy offloads the integration costs to the connecting apps and leverages its central position, the Open Vocab particpant assumes that they are merely *one data provider in an open network of similar providers*. Standard vocabularies allow connecting apps to use one translation layer per model rather than the exponentially growing number of translation layers as outlined above. We believe this will dramatically lower costs (compared to point-to-point) for *the network as a whole* once it grows beyond a small number of apps.
 
  Low cost integration is one of the principles of [Commons Based Peer Production](http://en.wikipedia.org/wiki/Commons-based_peer_production#Principles)
 
- 2. **Mitigate the security vulnerabilities of centrally hosted data**. Open vocab helps faciltate a Web where individuals and groups host their own data while still connecting to public data and other trusted individuals and groups in the network. This point does require more technical backing than Open Vocab. We plan to use [Secure Scuttlebut](https://github.com/ssbc) for much of this.
+ 2. **Mitigate the security vulnerabilities of centrally hosted data**. Open vocab helps faciltate a Web where individuals and groups host their own data while still connecting to public data and other trusted individuals and groups in the network. This point does require more technical backing than Open Vocab (we plan to use [Secure Scuttlebut](https://github.com/ssbc)).
 
  3. **Shift power from large providers towards indivduals and groups.** As above, users need not submit to any Terms of Service or fear the loss of their data when they host it themselves. This aligns OpenApp with the [IndieWeb](http://www.wired.co.uk/news/archive/2013-08/15/indie-web) and [unhosted](https://unhosted.org/) movements.
 
 **Costs and Disadvantages:**
-The costs come from:
- 1. Agreeing to a standard vocab, composing this vocab from existing standards, and writing our own when existing ones are not appropriate. In OpenApp, the OpenVocab team faciliate these tasks.
+Costs come from:
+ 1. Agreeing to a standard vocab: composing this vocab from existing standards, or writing our own when existing ones are not appropriate. In OpenApp, the OpenVocab team facilitate these tasks.
 
  2. For serving apps, modifying or implementing API's that conform to the above standards. Fortunately JSON-LD makes this somewhat easier than this would otherwise be (discussed below).
 
- 3. For client apps, implementing JSON-LD tooling and the **single** translation layer between the OpenVocab model in question and their own representation.
+ 3. For client apps, implementing JSON-LD tooling and the translation layers between OpenVocab entities in question and their own models.
 
 
-**Organisational analog:**
+**Analog organisation:**
 The Commons.
 
 *also known as an [ontology](http://en.wikipedia.org/wiki/Ontology_(information_science))
 
-
-
-
-
-
-
 ####General Discussion
 
+The astute reader will have noticed that the four strategies each have a different pattern of costs and benefits.  Point-to-point has smaller incremental costs and benefits, but benfits degrade as the network grows. Central Hub has small costs, high flexibility, but benefits dispropotionately go to the Hub and reinforce aspects of the Web that we find concerning. Integration-as-a-service delivers a large amount of value quickly but has ongoing costs and the same problems as Central Hub. Open Vocab has a larger upfront investment cost (vocab R&D, reaching agreement) but scalable, exapanding benefits accross the network.
 
+For these reasons and the values that go alongside them we reccomend the Open Vocab strategy. In Part II we look at implementing an Open Vocab Strategy with [JSON-LD](http://json-ld.org/)
 
-
-
-
-
-
+---
+## Part II: Implementation Details
 
 ### Open Vocab Implementions with JSON-LD
 
+#### JSON-LD Introduction
 
-##Data Entities
+#### The @context object
+
+
+#### Standard Vocabs and Prefixes
+
+#### Modifying the API
+
+#### JSON-LD tooling
+
+
+## Part III: Data Entities
 
 ###User
 
+[TODO add user]
+
 ###Group
+
+[TODO add user]
 
 ###Membership
 
+[TODO add user]
+
+
 ###Motion 
+
+[TODO discuss Popolo Mtion spec]
+
 
 ###Vote
