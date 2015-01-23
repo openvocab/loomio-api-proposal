@@ -191,7 +191,7 @@ We have framed the costs and benefits of previous strategies in instrumental ter
 
  2. **Mitigate the security vulnerabilities of centrally hosted data**. Open vocab helps faciltate a Web where individuals and groups host their own data while still connecting to public data and other trusted individuals and groups in the network. This point does require more technical backing than Open Vocab (we plan to use [Secure Scuttlebut](https://github.com/ssbc)).
 
- 3. **Shift power from large providers towards indivduals and groups.** As above, users need not submit to any Terms of Service or fear the loss of their data when they host it themselves. This aligns OpenApp with the [IndieWeb](http://www.wired.co.uk/news/archive/2013-08/15/indie-web) and [unhosted](https://unhosted.org/) movements.
+ 3. **Shift power from large providers towards individuals and groups.** As above, users need not submit to any Terms of Service or fear the loss of their data when they host it themselves. This aligns OpenApp with the [IndieWeb](http://www.wired.co.uk/news/archive/2013-08/15/indie-web) and [unhosted](https://unhosted.org/) movements.
 
 **Costs and Disadvantages:**
 Costs come from:
