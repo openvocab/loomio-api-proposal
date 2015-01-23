@@ -33,7 +33,7 @@ Integrating at the Data level means that an app can read from (and potentially w
 
 We can think of data integration as a 'substrate' layer on top of which we can build further integrated features and apps. Data integration makes it possible to recreate the same UI elements of one app within another. Similarly, data integration makes it possible to use an app as a service for another app. The reverse is not true and there are also functionality that only data integration can provide that the other kinds of integration cannot. 
 
-For the remainder of this article we only considers Data integration. We discuss UI and Business Logic integration separately in forthcoming articles.
+For the remainder of this article we only consider Data integration. We discuss UI and Business Logic integration separately in forthcoming articles.
 
 -----
  
