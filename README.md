@@ -33,7 +33,7 @@ Integrating at the Data level means that an app can read from (and potentially w
 
 We can think of data integration as a 'substrate' layer on top of which we can build further integrated features and apps. Data integration makes it possible to recreate the same UI elements of one app within another. Similarly, data integration makes it possible to use an app as a service for another app. The reverse is not true and there are also functionality that only data integration can provide that the other kinds of integration cannot. 
 
-For the remainder of this article we only considers Data integration. We discuss UI and Business Logic integration separately in forthcoming articles.
+For the remainder of this article we only consider Data integration. We discuss UI and Business Logic integration separately in forthcoming articles.
 
 -----
  
@@ -191,7 +191,7 @@ We have framed the costs and benefits of previous strategies in instrumental ter
 
  2. **Mitigate the security vulnerabilities of centrally hosted data**. Open vocab helps faciltate a Web where individuals and groups host their own data while still connecting to public data and other trusted individuals and groups in the network. This point does require more technical backing than Open Vocab (we plan to use [Secure Scuttlebut](https://github.com/ssbc)).
 
- 3. **Shift power from large providers towards indivduals and groups.** As above, users need not submit to any Terms of Service or fear the loss of their data when they host it themselves. This aligns OpenApp with the [IndieWeb](http://www.wired.co.uk/news/archive/2013-08/15/indie-web) and [unhosted](https://unhosted.org/) movements.
+ 3. **Shift power from large providers towards individuals and groups.** As above, users need not submit to any Terms of Service or fear the loss of their data when they host it themselves. This aligns OpenApp with the [IndieWeb](http://www.wired.co.uk/news/archive/2013-08/15/indie-web) and [unhosted](https://unhosted.org/) movements.
 
 **Costs and Disadvantages:**
 Costs come from:
