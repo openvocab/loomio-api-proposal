@@ -5,17 +5,17 @@
 
 This article gives an overview of software integration, outlines four strategies for a particular type of integration: 'data integration', reccommends one of the outlined strategies 'Open Vocab', and provides implementation details for that strategy with reference to Loomio, Cobudget and DemocracyOS.
 
-We align the OpenApp project and our reccomendations with the [IndieWeb](http://www.wired.co.uk/news/archive/2013-08/15/indie-web) and [unhosted](https://unhosted.org/) movements and the process outlined in [Rebuilding the Web We Lost](http://dashes.com/anil/2012/12/rebuilding-the-web-we-lost.html). Accordingly, we value tools and processes that promote open, democratic participation and where users control their own data. 
+We align the OpenApp project and our reccomendations with the [IndieWeb](http://www.wired.co.uk/news/archive/2013-08/15/indie-web) and [unhosted](https://unhosted.org/) movements and the process outlined in [Rebuilding the Web We Lost](http://dashes.com/anil/2012/12/rebuilding-the-web-we-lost.html). Accordingly, we value tools and processes that promote open, democratic participation; and where users control their own data. 
 
 ###How to use this article
 
 We've written this article with a non-technical audience in mind but still assume you're familiar with some basic technical terms of the Web. For example, you will need to understand what [API](http://en.wikipedia.org/wiki/Application_programming_interface) means. 
 
-If you want a high-level of overview of how an important subset of software integration works and the implications of diffirent strategies read [What do you mean by 'Data Integration'?](#What do you mean by 'Data Integration'?) followed by [Data Integration Strategies](#Data Integration Strategies).
+If you want a high-level of overview of how an important subset of software integration works and the implications of diffirent strategies read [Types of Data Integration](#types-of-integration) followed by [Data Integration Strategies](#part-i-data-integration-strategies).
 
-If you're already confident in the Open Vocab approach and want to understand how Linked Data and JSON-LD work continue on with [Open Vocab Implementations with JSON-LD](#Open Vocab Implementations with JSON-LD).
+If you're already confident in the Open Vocab approach and want to understand how Linked Data and JSON-LD work continue on with [Open Vocab Implementations with JSON-LD](#open-vocab-implementions-with-json-ld).
 
-If you want to dive into the details of what the Loomio and Cobudget's APIs could look like head to [Data Entities](#Data Entities).
+If you want to dive into the details of what the Loomio and Cobudget's APIs could look like head to [Data Entities](#part-III:-data-entities).
 
 ---
 ###Types of Integration
@@ -158,6 +158,7 @@ If the app in question only needs integration with market leaders (i.e. the 'Hub
 The Market. 
 
 **Disadvantages:**
+
 Has the same consequences as 'Central Hub'.
 
 If integrations form a key part of your app's value propositon then outsourcing this to a contracted service may put your team at a disadvantage later on.
