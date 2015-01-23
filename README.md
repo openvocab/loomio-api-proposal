@@ -5,7 +5,7 @@
 
 This article gives an overview of software integration, outlines four strategies for a particular type of integration: 'data integration', reccommends one of the outlined strategies 'Open Vocab', and provides implementation details for that strategy with reference to Loomio, Cobudget and DemocracyOS.
 
-We align the OpenApp project and our reccomendations with the [IndieWeb](http://www.wired.co.uk/news/archive/2013-08/15/indie-web) and [unhosted](https://unhosted.org/) movements and the process outlined in [Rebuilding the Web We Lost](http://dashes.com/anil/2012/12/rebuilding-the-web-we-lost.html). Accordingly, we value tools and processes that promote open, democratic participation; and where users control their own data. 
+We align the OpenApp project and our recommendations with the [IndieWeb](http://www.wired.co.uk/news/archive/2013-08/15/indie-web) and [unhosted](https://unhosted.org/) movements and the process outlined in [Rebuilding the Web We Lost](http://dashes.com/anil/2012/12/rebuilding-the-web-we-lost.html). Accordingly, we value tools and processes that promote open, democratic participation; and where users control their own data. 
 
 ###How to use this article
 
@@ -25,7 +25,7 @@ Software integration occurs at three levels:
  2. Business Logic aka 'Services', and
  3. Data
 
-Integrating at the UI level means that familiar components of one app appear in another app. For example, the Loomio decision pie chart might appear in Cobudget in some relevant context. In practice this could mean using the [<iframe>](https://developer.mozilla.org/en/docs/Web/HTML/Element/iframe) html element to directly embed a component. 
+Integrating at the UI level means that familiar components of one app appear in another app. For example, the Loomio decision pie chart might appear in Cobudget in some relevant context. In practice this could mean using the [iframe](https://developer.mozilla.org/en/docs/Web/HTML/Element/iframe) html element to directly embed a component. 
 
 Integrating at the Business Logic level means that apps rely on common 'services'. [Gravatar](https://en.gravatar.com/) is a popular service that allows app users to define their avatar image in one place and allow other apps to pull this information from it. In another example, two independent apps might depend on a third 'Group Service' app to provide a common store for group data. This might allow a user to join a group in one app and be automatically added to the same group in another app. 
 
@@ -69,7 +69,7 @@ profile_url:
 ... 
 ```
 
-Both of these include the term ```username``` which is undoubtedly the same concept. Other properties use different terms e.g. ```profile_url``` (Loomio) is the same concept as ```profilePictureUrl``` (DemocracyOS). The 'name' concept is specified as ```name``` in Loomio but split across ```firstName``` and ```lastName``` in DemocracyOS. Humans can recognise ```profile_url``` and ```profilePictureUrl``` as the same concept but machines are not so smart! Further complications can arise when properties are formatted in different ways. Dates and time data might have the same property name ```createdAt``` but use different date formats. 
+Both of these include the term ```username``` which is undoubtedly the same concept. Other properties use different terms e.g. ```profile_url``` (Loomio) is the same concept as ```profilePictureUrl``` (DemocracyOS). The 'name' concept is specified as ```name``` in Loomio but split across ```firstName``` and ```lastName``` in DemocracyOS. Humans can recognise ```profile_url``` and ```profilePictureUrl``` as the same concept but machines are not so smart! Further complications can arise when properties are formatted in different ways. Dates and time data might have the same property name: ```createdAt``` but use different date formats. 
 
 We know of four strategies for dealing with the 'translation problem' and integrating data between apps:
  1. 'Point-to-point Integration',
@@ -126,7 +126,7 @@ The Central Hub strategy puts the onus of connecting and writing translation lay
 Clearly this is only viable if your app is a market leader and hosts desirable data. Twitter, Facebook and other well-known apps have succesfully used this strategy to create a surrounding 'spoke and hub' network of apps. 
 
 **Motivation:**
-Every app that connects and relies on the Hub's API has the incentive for the Hub to maintain a leading positon. These other apps may also do their own marketing and promote the Hub by proxy. For example, [Medium](http://medium.com/) requires users to have a Twitter account. Medium was founded by one of the Twitter cofounders who clearly has an incentive to promote Twitter and extend the 'Twittersphere'. 
+Every app that connects and relies on the Hub's API has the incentive for the Hub to maintain a leading positon. These other apps may also do their own marketing and promote the Hub by proxy. For example, [Medium](http://medium.com/) requires users to have a Twitter (the Hub) account. Medium was founded by one of the Twitter cofounders who clearly has an incentive to promote Twitter and extend the 'Twittersphere'. 
 
 **Costs:**
 This strategy costs much less than the point-to-point strategy. The central app only needs to maintain an easy-to-use API with good documentation. Connecting apps bear integration costs.
@@ -144,7 +144,7 @@ Today, the majority of current web users experience comes via large providers li
 
  3. **Fragile user rights**. The business behind the Hub app may go bust, or another business may buy it prompting a revison in the Terms of Service and degradation of user rights.
 
-The situation is analogous to the use private offline spaces for public good purposes: when private interests control and surveil the spaces where people meet and interact then these interests will often act to curtail freedoms of speech, protest and dissent. For more information on this persepctive please see [@anildash](https://github.com/anildash)'s talk [The Web We Lost](http://dashes.com/anil/2012/12/the-web-we-lost.html)
+The situation is analogous to the use private offline spaces for public good purposes: when private interests control and surveil the spaces where people meet and interact then these interests will often act to curtail freedoms of speech, protest and dissent. For more information on this perspective please see [@anildash](https://github.com/anildash)'s talk [The Web We Lost](http://dashes.com/anil/2012/12/the-web-we-lost.html)
 
 ---
 ###Integration as a Service
@@ -189,7 +189,7 @@ We have framed the costs and benefits of previous strategies in instrumental ter
 
  Low cost integration is one of the principles of [Commons Based Peer Production](http://en.wikipedia.org/wiki/Commons-based_peer_production#Principles)
 
- 2. **Mitigate the security vulnerabilities of centrally hosted data**. Open vocab helps faciltate a Web where individuals and groups host their own data while still connecting to public data and other trusted individuals and groups in the network. This point does require more technical backing than Open Vocab (we plan to use [Secure Scuttlebut](https://github.com/ssbc)).
+ 2. **Mitigate the security vulnerabilities of centrally hosted data**. Open vocab helps facilitate a Web where individuals and groups host their own data while still connecting to public data and other trusted individuals and groups in the network. This point does require more technical backing than Open Vocab (we plan to use [Secure Scuttlebut](https://github.com/ssbc)).
 
  3. **Shift power from large providers towards indivduals and groups.** As above, users need not submit to any Terms of Service or fear the loss of their data when they host it themselves. This aligns OpenApp with the [IndieWeb](http://www.wired.co.uk/news/archive/2013-08/15/indie-web) and [unhosted](https://unhosted.org/) movements.
 
@@ -209,9 +209,9 @@ The Commons.
 
 ####General Discussion
 
-The astute reader will have noticed that the four strategies each have a different pattern of costs and benefits.  Point-to-point has smaller incremental costs and benefits, but benfits degrade as the network grows. Central Hub has small costs, high flexibility, but benefits dispropotionately go to the Hub and reinforce aspects of the Web that we find concerning. Integration-as-a-service delivers a large amount of value quickly but has ongoing costs and the same problems as Central Hub. Open Vocab has a larger upfront investment cost (vocab R&D, reaching agreement) but scalable, exapanding benefits accross the network.
+The four strategies each have a different pattern of costs and benefits.  Point-to-point has smaller incremental costs and benefits, but benefits degrade as the network grows. Central Hub has small costs, high flexibility, but benefits dispropotionately go to the Hub and reinforce aspects of the Web that we find concerning. Integration-as-a-service delivers a large amount of value quickly but has ongoing costs and the same problems as Central Hub. Open Vocab has a larger upfront investment cost (vocab R&D, reaching agreement) but scalable, expanding benefits across the network.
 
-For these reasons and the values that go alongside them we reccomend the Open Vocab strategy. In Part II we look at implementing an Open Vocab Strategy with [JSON-LD](http://json-ld.org/)
+For these reasons and the values that go alongside them we reccommend the Open Vocab strategy. In Part II we look at implementing an Open Vocab Strategy with [JSON-LD](http://json-ld.org/)
 
 ---
 ## Part II: Implementation Details
