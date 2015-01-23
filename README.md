@@ -3,9 +3,9 @@
 
 ##Introduction
 
-This article gives an overview of software integration, outlines four strategies for a particular type of integration: 'data integration', reccommends one of the outlined strategies 'Open Vocab', and provides implementation details for that strategy with reference to Loomio, Cobudget and DemocracyOS.
+This article gives an overview of software integration, outlines four strategies for a particular type of integration: 'data integration', recommends one of the outlined strategies 'Open Vocab', and provides implementation details for that strategy with reference to Loomio, Cobudget and DemocracyOS.
 
-We align the OpenApp project and our reccomendations with the [IndieWeb](http://www.wired.co.uk/news/archive/2013-08/15/indie-web) and [unhosted](https://unhosted.org/) movements and the process outlined in [Rebuilding the Web We Lost](http://dashes.com/anil/2012/12/rebuilding-the-web-we-lost.html). Accordingly, we value tools and processes that promote open, democratic participation; and where users control their own data. 
+We align the OpenApp project and our recommendations with the [IndieWeb](http://www.wired.co.uk/news/archive/2013-08/15/indie-web) and [unhosted](https://unhosted.org/) movements and the process outlined in [Rebuilding the Web We Lost](http://dashes.com/anil/2012/12/rebuilding-the-web-we-lost.html). Accordingly, we value tools and processes that promote open, democratic participation; and where users control their own data. 
 
 ###How to use this article
 
