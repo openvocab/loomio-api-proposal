@@ -25,7 +25,7 @@ Software integration occurs at three levels:
  2. Business Logic aka 'Services', and
  3. Data
 
-Integrating at the UI level means that familiar components of one app appear in another app. For example, the Loomio decision pie chart might appear in Cobudget in some relevant context. In practice this could mean using the [iframe](https://developer.mozilla.org/en/docs/Web/HTML/Element/iframe) html element to directly embed a component. 
+Integrating at the UI level means that familiar components of one app appear directly (more or less) in another app. For example, the Loomio decision pie chart might appear in Cobudget in some relevant context. In practice this could mean using the [iframe](https://developer.mozilla.org/en/docs/Web/HTML/Element/iframe) html element to directly embed a component. 
 
 Integrating at the Business Logic level means that apps rely on common 'services'. [Gravatar](https://en.gravatar.com/) is a popular service that allows app users to define their avatar image in one place and allow other apps to pull this information from it. In another example, two independent apps might depend on a third 'Group Service' app to provide a common store for group data. This might allow a user to join a group in one app and be automatically added to the same group in another app. 
 
@@ -129,7 +129,7 @@ Clearly this is only viable if your app is a market leader and hosts desirable d
 Every app that connects and relies on the Hub's API has the incentive for the Hub to maintain a leading positon. These other apps may also do their own marketing and promote the Hub by proxy. For example, [Medium](http://medium.com/) requires users to have a Twitter (the Hub) account. Medium was founded by one of the Twitter cofounders who clearly has an incentive to promote Twitter and extend the 'Twittersphere'. 
 
 **Costs:**
-This strategy costs much less than the point-to-point strategy. The central app only needs to maintain an easy-to-use API with good documentation. Connecting apps bear integration costs.
+This strategy costs much less *for the Hub app* than the point-to-point strategy. The central app only needs to maintain an easy-to-use API with good documentation. Connecting apps bear integration costs.
 
 **Analog organisation:**
 Feudalism. The Hub controls most of the data in the network. Many apps rely on the central app for functionality.
@@ -185,9 +185,11 @@ When apps use the same vocabulary a feature that imports data from one app can a
 **Motivation:**
 We have framed the costs and benefits of previous strategies in instrumental terms - how do these weigh up for each app and the team behind it? Broader concerns motivate an Open Vocab strategy:
 
- 1. Provide **low-cost integration** for connecting (client) apps. Whereas an app following the Central Hub strategy offloads the integration costs to the connecting apps and leverages its central position, the Open Vocab particpant assumes that they are merely *one data provider in an open network of similar providers*. Standard vocabularies allow connecting apps to use one translation layer per model rather than the exponentially growing number of translation layers as outlined above. We believe this will dramatically lower costs (compared to point-to-point) for *the network as a whole* once it grows beyond a small number of apps.
+ 1a. Provide **low-cost integration** for connecting (client) apps. Whereas an app following the Central Hub strategy offloads the integration costs to the connecting apps and leverages its central position, the Open Vocab participant assumes that they are merely *one data provider in an open network of similar providers*. Standard vocabularies allow connecting apps to use one translation layer per model rather than the exponentially growing number of translation layers as outlined above. We believe this will dramatically lower costs (compared to point-to-point) for *the network as a whole* once it grows beyond a small number of apps.
 
  Low cost integration is one of the principles of [Commons Based Peer Production](http://en.wikipedia.org/wiki/Commons-based_peer_production#Principles)
+
+ 1b. Further reduce integration costs by  **promoting existing standards**. When the network adopts an existing standard
 
  2. **Mitigate the security vulnerabilities of centrally hosted data**. Open vocab helps facilitate a Web where individuals and groups host their own data while still connecting to public data and other trusted individuals and groups in the network. This point does require more technical backing than Open Vocab (we plan to use [Secure Scuttlebut](https://github.com/ssbc)).
 
@@ -211,17 +213,28 @@ The Commons.
 
 The four strategies each have a different pattern of costs and benefits.  Point-to-point has smaller incremental costs and benefits, but benefits degrade as the network grows. Central Hub has small costs, high flexibility, but benefits dispropotionately go to the Hub and reinforce aspects of the Web that we find concerning. Integration-as-a-service delivers a large amount of value quickly but has ongoing costs and the same problems as Central Hub. Open Vocab has a larger upfront investment cost (vocab R&D, reaching agreement) but scalable, expanding benefits across the network.
 
-For these reasons and the values that go alongside them we reccommend the Open Vocab strategy. In Part II we look at implementing an Open Vocab Strategy with [JSON-LD](http://json-ld.org/)
+For these reasons and the values expressed we reccommend the Open Vocab strategy. In Part II we look at implementing an Open Vocab Strategy with [JSON-LD](http://json-ld.org/)
 
 ---
 ## Part II: Implementation Details
 
 ### Open Vocab Implementions with JSON-LD
 
-#### JSON-LD Introduction
+#### JSON-LD and Linked Data Introduction
+
+JSON-LD (Javascript Object Notation - Linked Data) is an extension of the common JSON data format. 'Linked Data' refers to a class of data formats that permit the explicit definition of data entities and their properties by linking to standardised definitons (i.e. vocabs) at a URL elsewhere on the Web. 
+
+To illustrate the utility of 'definition by linking' feature, let us consider some of the potential difficulties of an Open Vocab implementation and how JSON-LD solves these difficulties:
+
+1. Modifying the API. Developers prefer to keep the terminology used in a codebase *consistent* and *specific* to the concept that the models represent. Modifying the API to conform to vocabulary breaks that consistent. Further, modifying an API is kind of a big deal..
+
+2. Which Entity and Which Property?
+
+2. Which *particular Entity*?
+
+Linked Data 
 
 #### The @context object
-
 
 #### Standard Vocabs and Prefixes
 
