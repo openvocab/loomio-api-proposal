@@ -144,7 +144,7 @@ Today, the majority of current web users experience comes via large providers li
 
  3. **Fragile user rights**. The business behind the Hub app may go bust, or another business may buy it prompting a revison in the Terms of Service and degradation of user rights.
 
-The situation is analogous to the use private offline spaces for public good purposes: when private interests control and surveil the spaces where people meet and interact then these interests will often act to curtail freedoms of speech, protest and dissent. For more information on this perspective please see [@anildash](https://github.com/anildash)'s talk [The Web We Lost](http://dashes.com/anil/2012/12/the-web-we-lost.html)
+The situation is analogous to the use private offline spaces for public good purposes: when private interests control and surveil the spaces where people meet and interact then these interests will often act to curtail freedoms of speech, protest and dissent. For more on this perspective please see [@anildash](https://github.com/anildash)'s talk [The Web We Lost](http://dashes.com/anil/2012/12/the-web-we-lost.html)
 
 ---
 ###Integration as a Service
@@ -185,11 +185,12 @@ When apps use the same vocabulary a feature that imports data from one app can a
 **Motivation:**
 We have framed the costs and benefits of previous strategies in instrumental terms - how do these weigh up for each app and the team behind it? Broader concerns motivate an Open Vocab strategy:
 
- 1a. Provide **low-cost integration** for connecting (client) apps. Whereas an app following the Central Hub strategy offloads the integration costs to the connecting apps and leverages its central position, the Open Vocab participant assumes that they are merely *one data provider in an open network of similar providers*. Standard vocabularies allow connecting apps to use one translation layer per model rather than the exponentially growing number of translation layers as outlined above. We believe this will dramatically lower costs (compared to point-to-point) for *the network as a whole* once it grows beyond a small number of apps.
+ 1. 
+ (a) Provide **low-cost integration** for connecting (client) apps. Whereas an app following the Central Hub strategy offloads the integration costs to the connecting apps and leverages its central position, the Open Vocab participant assumes that they are merely *one data provider in an open network of similar providers*. Standard vocabularies allow connecting apps to use one translation layer per model rather than the exponentially growing number of translation layers as outlined above. We believe this will dramatically lower costs (compared to point-to-point) for *the network as a whole* once it grows beyond a small number of apps.
 
  Low cost integration is one of the principles of [Commons Based Peer Production](http://en.wikipedia.org/wiki/Commons-based_peer_production#Principles)
 
- 1b. Further reduce integration costs by  **promoting existing standards**. When the network adopts an existing standard
+ (b) Further reduce integration costs by  **promoting existing standards**. When the network adopts an existing standard.
 
  2. **Mitigate the security vulnerabilities of centrally hosted data**. Open vocab helps facilitate a Web where individuals and groups host their own data while still connecting to public data and other trusted individuals and groups in the network. This point does require more technical backing than Open Vocab (we plan to use [Secure Scuttlebut](https://github.com/ssbc)).
 
@@ -230,7 +231,7 @@ To illustrate the utility of 'definition by linking' feature, let us consider so
 
 2. Which Entity and Which Property?
 
-2. Which *particular Entity*?
+3. Which *particular Entity*?
 
 Linked Data 
 
